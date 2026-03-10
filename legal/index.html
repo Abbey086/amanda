@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>AI Trip Planner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brand: '#E78D0C',
+        },
+        fontFamily: {
+          poppins: ['Poppins', 'sans-serif'],
+        },
+        keyframes: {
+          blink: {
+            '0%, 100%': { opacity: '0.2' },
+            '50%': { opacity: '1' },
+          }
+        },
+        animation: {
+          blink: 'blink 1.2s infinite',
+        }
+      }
+    }
+  }
+</script>
+</head>
+
+<body class="m-0 font-poppins bg-white text-[#111] flex h-screen">
+
+<div class="flex-1 flex flex-col">
+ 
+<div class="flex-1 flex flex-col items-center justify-center text-center" id="start">
+
+    <div class="text-[50px] font-extrabold">
+        Let's plan your trip.<span class="text-[30px] block text-brand"> Which country are you visiting? </span>
+    </div>
+
+    <div class="mt-[25px] w-[650px] max-w-[90%] border border-[#e5e5e5] rounded-[12px] p-[20px] bg-[#fafafa]">
+        <div class="flex gap-[6px] mb-[10px]" id="start-ki">
+            <button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChatQ(this)">Ghana</button>
+            <button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChatQ(this)">Togo</button>
+            <button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChatQ(this)">Benin</button>
+            <button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChatQ(this)">South Africa</button>
+            <button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChatQ(this)">Ivory Coast</button>
+        </div>
+        
+        <textarea class="w-full border-none resize-none outline-none text-[16px] bg-transparent" id="startInput" rows="2" placeholder="Where are we visiting?"></textarea>
+
+        <div class="flex justify-end mt-[10px]">
+            <button class="bg-brand text-white py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="startChat()">Start</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="hidden flex-col h-full" id="chat">
+
+    <div class="flex-1 overflow-y-auto pt-[30px] px-[30px] pb-[40vh] flex flex-col w-[850px] max-[850px]:w-full mx-auto gap-[18px]" id="messages"></div>
+
+    <div class="border border-[#c2c0c0] rounded-[16px] p-[15px] flex flex-col gap-[10px] fixed bottom-[6px] w-auto left-1/2 -translate-x-1/2 bg-white z-[23456789098765]">
+        <div class="flex gap-[6px] mb-[10px]" id="sgts"></div>
+        <div class="w-full flex flex-col">
+            <textarea class="rounded-[8px] p-[10px] w-[500px] border-none resize-none outline-none text-[16px] bg-transparent" id="chatInput" placeholder="Your reply.........." rows="3"></textarea>
+            
+            <svg class="bg-brand text-white p-[6px] aspect-square w-[35px] float-right rounded-full self-end cursor-pointer" onclick="send()" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3C12.2652 3 12.5196 3.10536 12.7071 3.29289L19.7071 10.2929C20.0976 10.6834 20.0976 11.3166 19.7071 11.7071C19.3166 12.0976 18.6834 12.0976 18.2929 11.7071L13 6.41421V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V6.41421L5.70711 11.7071C5.31658 12.0976 4.68342 12.0976 4.29289 11.7071C3.90237 11.3166 3.90237 10.6834 4.29289 10.2929L11.2929 3.29289C11.4804 3.10536 11.7348 3 12 3Z" fill="#ffffff"></path> </g></svg>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<script>
+let step = 0;
+let data = {};
+
+function quick(t) {
+    document.getElementById("startInput").value = t;
+}
+
+function startChat() {
+    let text = document.getElementById("startInput").value;
+    if(text) startChatQ({ innerHTML: text });
+}
+
+function startChatQ(x) {
+    let val = x.innerHTML;
+    
+    document.getElementById("start").style.display = "none";
+    document.getElementById("chat").style.display = "flex";
+
+    bot("Let's plan your trip. Which country are you visiting?", 0);
+    addUser(val);
+    step = 1;
+    logic(val);
+}
+
+function addUser(t) {
+    let d = document.createElement("div");
+    d.className = "max-w-[600px] py-[14px] px-[18px] leading-[1.6] bg-brand text-white self-end rounded-[16px_3px_16px_16px]";
+    d.innerText = t;
+    document.getElementById("messages").appendChild(d);
+    scroll();
+}
+
+function bot(t, x = 1200) {
+    let m = document.createElement("div");
+    m.className = "max-w-[600px] py-[14px] px-[18px] rounded-[3px_16px_16px_16px] bg-[#f5f5f5]";
+
+    m.innerHTML = `<div class="flex gap-[5px] items-center">
+        <div class="w-[7px] h-[7px] bg-brand rounded-full animate-blink"></div>
+        <div class="w-[7px] h-[7px] bg-brand rounded-full animate-blink" style="animation-delay: 0.2s"></div>
+        <div class="w-[7px] h-[7px] bg-brand rounded-full animate-blink" style="animation-delay: 0.4s"></div>
+    </div>`;
+
+    document.getElementById("messages").appendChild(m);
+    scroll();
+
+    setTimeout(() => {
+        m.innerHTML = t;
+        scroll();
+    }, x);
+}
+
+function populateSgts(arr) {
+    document.getElementById('sgts').innerHTML = '';
+    setTimeout(() => {
+        for(let i = 0; i < arr.length; i++) {
+            document.getElementById('sgts').innerHTML += `<button class="border border-black bg-white hover:bg-brand py-[10px] px-[18px] rounded-[8px] cursor-pointer" onclick="fillFit(this)">${arr[i]}</button>`;
+        }     
+    }, 1400);
+}
+
+function fillFit(elem) {
+    document.getElementById('chatInput').value = elem.innerText;
+    send();
+}
+
+function send() {
+    let v = document.getElementById("chatInput").value;
+    if (!v) return;
+
+    addUser(v);
+    document.getElementById("chatInput").value = "";
+    logic(v);
+}
+function logic(v) {
+    if (step == 1) {
+        data.country = v;
+        step++;
+        populateSgts(['Historical', 'Adventure', 'Workshops', 'Safari', 'Beach']);
+        bot("What activities are you interested in?");
+    } else if (step == 2) {
+        data.activities = v;
+        step++;
+        populateSgts([1, 2, 3, 7, 10, 14]);
+        bot("How many days will you stay?");
+    } else if (step == 3) {
+        data.days = v;
+        step++;
+        populateSgts(['3 star', '4 star', '5 star', 'Apartment', 'Family stay']);
+        bot("Preferred accommodation?");
+    } else if (step == 4) {
+        data.hotel = v;
+        step++;
+        populateSgts([1, 2, 3, 4, 5]);
+        bot("How many travelers?");
+    } else if (step == 5) {
+        data.people = v;
+        step++;
+        // Added dollar signs to the suggestions for better formatting
+        populateSgts(['$1,000', '$3,000', '$5,000', '$10,000+']); 
+        bot("What is your budget range?");
+    } else {
+        // Capture the budget input before generating
+        data.budget = v; 
+        generate();
+    }
+}
+
+function generate() {
+    populateSgts([]);
+    bot("Generating your personalized itinerary...");
+
+    setTimeout(() => {
+        let m = document.createElement("div");
+        m.className = "max-w-[600px] w-full py-[20px] px-[24px] rounded-[3px_16px_16px_16px] bg-[#f5f5f5]";
+
+        m.innerHTML = `
+            <div class="font-extrabold text-[18px] text-brand mb-[15px]">
+                ✈️ ${data.days}-Day Escape to ${data.country}
+            </div>
+            
+            <div class="grid grid-cols-2 gap-[10px] mb-[20px] p-[15px] bg-white rounded-[8px] border border-[#e5e5e5] text-[13px]">
+                <div><span class="text-gray-500 text-[11px] block uppercase tracking-wider">Focus</span><span class="font-bold">${data.activities}</span></div>
+                <div><span class="text-gray-500 text-[11px] block uppercase tracking-wider">Stay</span><span class="font-bold">${data.hotel}</span></div>
+                <div><span class="text-gray-500 text-[11px] block uppercase tracking-wider">Travelers</span><span class="font-bold">${data.people}</span></div>
+                <div><span class="text-gray-500 text-[11px] block uppercase tracking-wider">Budget</span><span class="font-bold text-green-600">${data.budget}</span></div>
+            </div>
+
+            
+
+            <button class="mt-[20px] w-full bg-brand text-white py-[12px] px-[18px] rounded-[8px] font-bold cursor-pointer" onclick="alert('Itinerary Saved!')">
+                Save Itinerary
+            </button>
+            
+            <div class="text-center text-gray-400 mt-[12px]">
+                Our travel representative will contact you shortly to finalize the booking.
+            </div>
+        `;
+
+        document.getElementById("messages").appendChild(m);
+        scroll();
+    }, 2000);
+}
+function scroll() {
+    let messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight;
+}
+</script>
+
+</body>
+</html>
