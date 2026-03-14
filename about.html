@@ -8,7 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leader-line/1.0.7/leader-line.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@300..700&family=Special+Gothic+Expanded+One&display=swap"
       rel="stylesheet"
@@ -31,14 +31,12 @@
       body {
         overflow: hidden;
         background: #f9fafb;
-        max-height: 100dvh;
       }
 
       .panel {
         position: absolute;
         width: 100%;
-        height: 100dvh;
-        max-height: 100dvh;
+        height: 100vh;
         top: 0;
         left: 0;
         display: grid;
@@ -56,6 +54,9 @@
         overflow: hidden;
         padding-block: 70px 20px;
       }
+      .reveal-mask.ccx {
+        padding-block: 30px;
+      }
       .reveal-mask.np {
         padding-block: 0;
       }
@@ -66,11 +67,6 @@
         text-align: center;
         font-weight: 800;
         line-height: 1.2;
-      }
-      @media screen and (max-width: 490px) {
-        .spring-heading{
-          font-size: 2.8rem;
-        }
       }
       .spring-heading span {
         font-family: "Special Gothic Expanded One", sans-serif;
@@ -114,6 +110,12 @@
         animation: levitate-r 4s ease-in-out infinite;
         transform-origin: center;
       }
+      .d-2 {
+        animation-delay: 2000ms;
+      }
+      .d-3 {
+        animation-delay: 3s;
+      }
 
       .section-nav {
         position: fixed;
@@ -142,10 +144,10 @@
 
   <body>
     <nav
-      class="fixed bg-white z-[3456] bottom-0 py-4 w-screen left-0 px-4 md:px-16 flex justify-between items-center"
+      class="fixed bg-white z-[3456] bottom-0 py-4 w-screen left-0 px-16 flex justify-between items-center"
     >
       <svg
-        class="fill-black hover:fill-sky-400 transition md:w-12 md:h-12 w-9 h-9"
+        class="fill-black hover:fill-sky-400 transition w-12 h-12"
         fill="black"
         xmlns="http://www.w3.org/2000/svg"
         xmlns:svg="http://www.w3.org/2000/svg"
@@ -163,7 +165,7 @@
         </g>
       </svg>
       <nav
-        class="md:relative fixed md:bottom-0 -bottom-1/2  flex md:flex-row flex-col text-center md:text-left bg-white md:bg-transparent pb-32 md:pb-0 pt-6 md:pt-0 transition-all duration-500 inset-x-0 -z-50 gap-3 w-screen md:w-auto  md:gap-12 text-xl font-semibold uppercase"
+        class="relative flex gap-12 text-xl font-semibold uppercase"
         id="nav"
       >
         <div
@@ -177,25 +179,11 @@
         >
         <a href="about.html" class="nav-link relative z-10 px-2 py-2">About</a>
       </nav>
-      <div class="flex gap-3 items-center flex-row-reverse">
-        <i onclick="exter(this)" class="ri-menu-2-line font-bold text-2xl"></i>
-        <script>
-          function exter(n){
-            document.getElementById('nav').classList.toggle('bottom-0')
-            document.getElementById('nav').classList.toggle('-bottom-1/2')
-            n.classList.toggle('ri-menu-2-line')
-            n.classList.toggle('ri-close-line')
-
-          }
-        </script>
-    <a
+      <a
         class="bg-black hover:bg-sky-500 py-2 px-5 rounded-full text-white"
         href="index.html?contact=1"
         >Talk To Us <i class="ri-send-plane-fill"></i
       ></a>
-
-      </div>
-  
     </nav>
 
     <div class="section-nav">
@@ -206,234 +194,121 @@
     <!-- SECTIONS -->
 
     <section class="panel active">
-      <header class="text-center absolute top-5 md:top-9">AMANDA TECHNOLOGIES</header>
+      <header class="text-center absolute top-9">
+        AMANDA TECHNOLOGIES
+        <span
+          class="block w-auto mx-auto bg-sky-100 border-sky-600 border mt-4 text-sm text-sky-700 rounded-full py-1"
+          >About Us</span
+        >
+      </header>
       <div class="reveal-mask">
         <h1 class="spring-heading -mt-9">
-          You need a <span class="bg-sky-4000">website</span>,<br />Don't you?
+          Based in <span class="bg-sky-4000">Uganda</span> since
+          <span class="bg-sky-4000">2024</span>
         </h1>
+        <p class="mx-auto w-4/6 mt-9 text-xl text-center">
+         We blend expert web development with high-impact graphic design to scale your brand. Our data-driven strategies and professional copywriting ensure your digital presence achieves maximum engagement and high-conversion results.
+        </p>
       </div>
       <img
-        src="props/rocket.png"
-        class="animate-levitate fixed bottom-8 md:top-1/2 left-16 w-56 md:w-72"
+        src="props/click3.png"
+        class="fixed floating-click w-48 top-0 left-0 z-10"
       />
     </section>
 
-    <section class="panel">
-      <header class="text-center absolute top-9">AMANDA TECHNOLOGIES</header>
-      <img
-        src="props/click2.png"
-        class="fixed floating-click w-24 md:w-48 top-0 left-0 z-10"
-      />
-      <div class="reveal-mask">
-        <h1 class="spring-heading">
-          We build <span class="bg-sky-4000">websites</span> and design
-          <span class="bg-sky-4000">graphics</span> for the sake of
-          <span class="bg-sky-4000">your</span> business
-        </h1>
-      </div>
-    </section>
-
-    <section class="panel flex flex-col justify-start">
+    <section class="panel bg-sky-600 text-white flex flex-col justify-start">
       <header class="text-center absolute top-9">AMANDA TECHNOLOGIES</header>
 
       <div class="mt-6 reveal-mask">
         <h1 class="spring-heading text-6xl">
-          Our <span class="text-sky-500">Creative</span> Process
+          Men <span class="text-black">behind</span> her
         </h1>
       </div>
+
+      <div class="flex justify-between px-20 w-full">
+        <div
+          id="founder1"
+          class="animate-levitate w-48 h-48 aspect-square rounded-full hover:w-56 hover:h-56 transition relative -bottom-24 bg-white"
+        >
+          <img
+            src="props/ronnie.jpeg"
+            class="w-full h-full rounded-full object-cover"
+          />
+          <h2 class="absolute w-full text-center font-bold text-xl -bottom-8">
+            Kisakye Ronnie
+          </h2>
+        </div>
+
+        <div
+          id="founder2"
+          class="animate-levitate w-48 h-48 aspect-square rounded-full hover:w-56 hover:h-56 transition relative bg-white"
+        >
+          <img
+            src="props/abbey.jpeg"
+            class="w-full h-full rounded-full object-cover"
+          />
+          <h2 class="absolute w-full text-center font-bold text-xl -bottom-8">
+            Mukiibi Abbey Joel
+          </h2>
+        </div>
+
+        <div
+          id="founder3"
+          class="animate-levitate w-48 h-48 aspect-square rounded-full hover:w-56 hover:h-56 transition relative -bottom-24 bg-white"
+        >
+          <img
+            src="props/kato.png"
+            class="w-full h-full rounded-full object-cover"
+          />
+          <h2 class="absolute w-full text-center font-bold text-xl -bottom-8">
+            Kato Solomon
+          </h2>
+        </div>
+      </div>
+      <script>
+        window.addEventListener("load", () => {
+          const f1 = document.getElementById("founder1");
+          const f2 = document.getElementById("founder2");
+          const f3 = document.getElementById("founder3");
+
+          const line1 = new LeaderLine(f1, f2, {
+            color: "white",
+            size: 4,
+            startPlug: "disc",
+            path: "straight",
+            endPlug: "disc",
+          });
+
+          const line2 = new LeaderLine(f3, f2, {
+            color: "white",
+            path: "straight",
+            size: 4,
+            startPlug: "disc",
+            endPlug: "disc",
+          });
+
+          function update() {
+            const secondPanel = document.querySelectorAll(".panel")[1];
+
+            if (secondPanel.classList.contains("active")) {
+              line1.show();
+              line2.show();
+              line1.position();
+              line2.position();
+            } else {
+              line1.hide();
+              line2.hide();
+            }
+
+            requestAnimationFrame(update);
+          }
+
+          update();
+        });
+      </script>
 
       <img
-        src="props/click.png"
-        class="fixed floating-click w-48 top-0 left-0 z-10"
-      />
-
-      <div
-        class="bg-sky-500 mt-44 w-4/5 h-6 flex justify-between px-16 items-center rounded-full mx-auto"
-      >
-        <div
-          class="h-9 w-9 rounded-full border-4 border-black bg-white relative"
-        >
-          <div class="w-64 absolute group text-center -left-24 -ml-4 top-10">
-            <img
-              src="props/cc1.jpg"
-              class="w-52 group-hover:opacity-100 opacity-0 transition group-hover:-top-48 object-cover h-32 left-6 rounded-2xl absolute -top-40"
-            />
-            <div class="reveal-mask np">
-              <h1 class="spring-heading text-2xl">Vision Analysis</h1>
-            </div>
-
-            <p>
-              We identify your core objectives to build a powerful foundation for all creative assets.
-            </p>
-          </div>
-        </div>
-        <div
-          class="h-9 w-9 rounded-full border-4 border-black bg-white relative"
-        >
-          <div
-            class="w-64 absolute group text-center -left-24 -ml-4 transform rotate-180 origin-top -top-6"
-          >
-            <p class="rotate-180">
-              Our team develops high-conversion digital solutions tailored to your specific brand identity and goals.
-            </p>
-            <div class="reveal-mask np rotate-180">
-              <h1 class="spring-heading text-2xl">Expert Execution</h1>
-            </div>
-            <img
-              src="props/cc2.jpg"
-              class="w-52 rotate-180 group-hover:opacity-100 opacity-0 transition group-hover:-top-48 object-cover h-32 left-6 rounded-2xl absolute -top-36"
-            />
-          </div>
-        </div>
-        <div
-          class="h-9 w-9 rounded-full border-4 border-black bg-white relative"
-        >
-          <div class="w-64 absolute text-center -left-24 -ml-4 top-10 group">
-            <img
-              src="props/cc3.jpg"
-              class="w-52 group-hover:opacity-100 opacity-0 transition group-hover:-top-48 object-cover h-32 left-6 rounded-2xl absolute -top-36"
-            />
-            <div class="reveal-mask np">
-              <h1 class="spring-heading text-2xl">Strategic Launch</h1>
-            </div>
-
-            <p>
-              We deploy your project with optimized marketing strategies to ensure maximum visibility and engagement.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section data-else="services" class="panel flex flex-col justify-start">
-      <div class="reveal-mask">
-        <header class="text-center w-full left-0 absolute top-9">
-          AMANDA TECHNOLOGIES
-        </header>
-        <h1 class="spring-heading text-6xl">
-          <span class="text-sky-400">Ideas</span> come in many shapes!<br />We
-          have them <span class="text-sky-400">all</span>
-        </h1>
-      </div>
-      <div class="flex gap-16">
-        <div
-          class="bg-sky-500 scale-75 scard hover:-top-6 transition hover:rotate-0 hover:scale-100 rotate-12 w-64 relative p-5 rounded-xl text-white"
-        >
-          <h2 class="font-bold text-3xl">Website Design</h2>
-          <img
-            class="h-48 absolute -top-1.5 hover:scale-125 transition -right-24"
-            src="props/click2.png"
-          />
-          <p class="font-semibold mt-32">
-            Do you have an organisation or a business? We are ready to build
-            your brand image online
-          </p>
-        </div>
-        <div
-          class="bg-sky-500 scale-75 scard hover:-top-6 transition hover:rotate-0 hover:scale-100 -rotate-12 w-64 relative py-2 px-5 rounded-xl text-white"
-        >
-          <h2 class="font-bold text-3xl">Graphics Design</h2>
-          <img
-            class="h-48 absolute -top-1.5 hover:scale-125 transition -right-24"
-            src="props/click.png"
-          />
-          <p class="font-semibold mt-32">
-            Want to make your brand visually stunning? We create designs that
-            communicate your story online.
-          </p>
-        </div>
-        <div
-          class="bg-sky-500 scale-75 scard hover:-top-6 transition hover:rotate-0 hover:scale-100 rotate-12 w-64 relative p-5 rounded-xl text-white"
-        >
-          <h2 class="font-bold text-3xl">Custom Software</h2>
-          <img
-            class="h-48 absolute -top-1.5 -right-24 hover:scale-125 transition"
-            src="props/clcik6.png"
-          />
-          <p class="font-semibold mt-24">
-            Need software tailored to your business? We build custom solutions
-            to automate & streamline operations.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="panel flex flex-col justify-start">
-      <header class="text-center absolute top-9">AMANDA TECHNOLOGIES</header>
-      <div class="reveal-mask">
-        <h1 class="spring-heading text-6xl">
-          We prefer <span class="text-sky-400">actions</span> <br />
-          to words
-        </h1>
-      </div>
-      <div
-        class="relative project-cards flex ml-48 mt-12 items-center h-40 gap-0"
-      >
-        <!-- Card 1 -->
-        <div
-          class="h-40 w-64 rounded-xl overflow-hidden relative -translate-x-0 hover:rotate-0 hover:scale-125 hover:z-50 transition-transform duration-500 -rotate-12"
-        >
-          <img src="project.png" class="w-full h-full object-cover" />
-          <div
-            class="bg-sky-500 absolute inset-0 flex flex-col justify-center items-center text-center text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-          >
-            <b class="font-bold">Kisaasi College School</b>
-            <a href="#" class="hover:underline">Learn More</a>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div
-          class="h-40 w-64 rounded-xl overflow-hidden relative -translate-x-16 hover:rotate-0 hover:scale-125 hover:z-50 transition-transform duration-500 -rotate-12"
-        >
-          <img src="project.png" class="w-full h-full object-cover" />
-          <div
-            class="bg-sky-500 absolute inset-0 flex flex-col justify-center items-center text-center text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-          >
-            <b class="font-bold">Kisaasi College School</b>
-            <a href="#" class="hover:underline">Learn More</a>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div
-          class="h-40 w-64 rounded-xl overflow-hidden relative -translate-x-32 hover:rotate-0 hover:scale-125 hover:z-50 transition-transform duration-500 -rotate-12"
-        >
-          <img src="project.png" class="w-full h-full object-cover" />
-          <div
-            class="bg-sky-500 absolute inset-0 flex flex-col justify-center items-center text-center text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-          >
-            <b class="font-bold">Kisaasi College School</b>
-            <a href="#" class="hover:underline">Learn More</a>
-          </div>
-        </div>
-
-        <div
-          class="h-40 w-64 rounded-xl overflow-hidden relative -translate-x-48 hover:rotate-0 hover:scale-125 hover:z-50 transition-transform duration-500 -rotate-12"
-        >
-          <img src="project.png" class="w-full h-full object-cover" />
-          <div
-            class="bg-sky-500 absolute inset-0 flex flex-col justify-center items-center text-center text-white opacity-0 hover:opacity-100 transition-opacity duration-300"
-          >
-            <b class="font-bold">Kisaasi College School</b>
-            <a href="#" class="hover:underline">Learn More</a>
-          </div>
-        </div>
-
-        <!-- Last card (See More) -->
-        <div
-          class="h-40 w-64 rounded-xl overflow-hidden relative -translate-x-60 hover:rotate-0 hover:scale-125 hover:z-50 transition-transform duration-500 -rotate-12"
-        >
-          <div
-            class="bg-sky-500 absolute inset-0 flex flex-col justify-center items-center text-center text-white opacity-100 transition-opacity duration-300"
-          >
-            <b class="font-bold">All Projects?</b>
-            <a href="/work" class="hover:underline">See More</a>
-          </div>
-        </div>
-      </div>
-      <img
-        src="props/click5.png"
+        src="props/click4.png"
         class="fixed floating-click w-48 top-0 left-0 z-10"
       />
     </section>
@@ -475,7 +350,7 @@
           All rights reserved.
         </h1>
       </div>
-      <div
+     <div
         id="footer"
         class="bg-sky-500 px-4 opacity-95 py-7 -rotate-12 rounded-2xl w-72 fixed animate-levitate text-white"
       >
@@ -691,8 +566,6 @@
                 y = floor;
               }
             }
-
-            rocket.style.transform = `translateY(${y}px)`;
 
             if (velocity !== 0 || y < floor) {
               requestAnimationFrame(animateQ);
